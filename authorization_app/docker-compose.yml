@@ -3,12 +3,12 @@ version: '3'
 services:
   backend:
     build:
-      context: ./authorization_app
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "6001:5000"
     volumes:
-      - ./authorization_app:/app
+      - ./backend:/app
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=development
