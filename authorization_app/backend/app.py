@@ -1,7 +1,13 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 
+debug_mode = os.environ.get('FLASK_DEBUG') == '1'
+
 app = Flask(__name__)
+
+if debug_mode:
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 users = {
     "foo": "saikyounoP@ssw0rd"
@@ -19,5 +25,4 @@ def login():
         return jsonify(authorized=False, message="Login failed!"), 401
 
 if __name__ == "__main__":
-    debug_mode = os.environ.get('FLASK_DEBUG') == '1'
     app.run(host="0.0.0.0", port=5000, debug=True)
